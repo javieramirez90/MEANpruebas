@@ -1,0 +1,30 @@
+{
+  "name": "meanpruebas",
+  "version": "1.0.0",
+  "description": "MEAN app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javieramirez90/MEANpruebas.git"
+  },
+  "keywords": [
+    "MEAN",
+    "stack",
+    "application",
+    "Project3",
+    "Ironhack"
+  ],
+  "author": "Javier Ramírez Contreras",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javieramirez90/MEANpruebas/issues"
+  },
+  "homepage": "https://github.com/javieramirez90/MEANpruebas#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.2.6"
+  }
+}
