@@ -1,0 +1,9 @@
+.school{
+  float: none;
+  margin: 0 auto;
+}
+
+.thumbnail img {
+  width: 140px;
+  height: auto;
+}
