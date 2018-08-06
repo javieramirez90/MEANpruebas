@@ -100,7 +100,7 @@ module.exports = (router) => {
       if (!req.body.password) {
         res.json({ success: false, message: 'No se ha proporcionado contraseña.' }); 
       } else {
-        User.findOne({ email: req.body.email}, (err, user) => {  
+        User.findOne({ email: req.body.email.toLowerCase() }, (err, user) => {  
           if (err) {
             res.json({ success: false, message: err }); 
           } else {
@@ -112,7 +112,7 @@ module.exports = (router) => {
                 res.json({ success: false, message: 'El password no coincide.' }); 
               } else {
                 const token = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '2h' }); 
-                res.json({ success: true, message: 'Inicio de sesión correcto', token: token, user: { email: user.email } }); //jsonwebtoken método para mantener la sesión iniciada
+                res.json({ success: true, message: 'Inicio de sesión exitoso', token: token, user: { email: user.email } }); //jsonwebtoken método para mantener la sesión iniciada
               }
             }
           }
@@ -120,6 +120,8 @@ module.exports = (router) => {
       }
     }
   });
-  
+     
+
+
   return router;
 }
