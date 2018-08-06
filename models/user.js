@@ -33,7 +33,7 @@ const emailValidators = [
     validator: emailLengthChecker, message: "El correo debe tener minimó 5 y máximo 30 caracteres"
   },
   {
-    validator: validEmail, message: "El formato debe ser de un email válido."
+    validator: validEmail, message: "El formato debe ser de un email válido"
   }
 ];
 
@@ -63,7 +63,7 @@ const usernameValidators = [
     validator: usernameLengthChecker, message: "El nombre de usuario debe tener minimó 4 y máximo 15 caracteres"
   },
   {
-    validator: validUsername, message: "El nombre de usuario debe ser compuesto por letras, minúsculas o mayúsculas y puede tener números del 0 al 9"
+    validator: validUsername, message: "El nombre de usuario no debe tener ningún caracter especial"
   }
 ];
 
