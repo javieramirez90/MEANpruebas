@@ -1,12 +1,10 @@
 const User = require('../models/user')
 
 module.exports = (router) => {
-
+  
+  
   router.post('/register', (req, res) => {
-    // req.body.email;
-    // req.body.username;
-    // req.body.password;
-
+    
     if(!req.body.email) {
       res.json({success: false, message: "Debes proporcionar un correo válido"});
     } else {
@@ -17,7 +15,6 @@ module.exports = (router) => {
           res.json({success: false, message: "Debes proporcionar una contraseña válida"});
         } else {
           
-
           let user = new User({
             email: req.body.email.toLowerCase(),
             username: req.body.username.toLowerCase(),
@@ -52,6 +49,43 @@ module.exports = (router) => {
           });
         }
       }
+    }
+  });
+
+
+  router.get('/checkEmail/:email', (req, res) => {
+    if(!req.params.email) {
+      res.json({success: false, message: "Debes proporcionar un correo"});
+    } else {
+      User.findOne({email: req.params.email}, (err, user) => {
+        if(err) {
+          res.json({success: false, message: err})
+        } else {
+          if(user) {
+            res.json({success: false, message: 'Este correo ya ha sido registrado'});
+          } else {
+            res.json({success: true, message: "Correo disponible"});
+          }
+        }
+      });
+    }
+  });
+
+  router.get('/checkUsername/:username', (req, res) => {
+    if(!req.params.username) {
+      res.json({success: false, message: "Debes proporcionar un nombre de usuario"});
+    } else {
+      User.findOne({username: req.params.username}, (err, user) => {
+        if(err) {
+          res.json({success: false, message: err})
+        } else {
+          if(user) {
+            res.json({success: false, message: 'Este nombre de usuario ya está en uso'});
+          } else {
+            res.json({success: true, message: "Nombre de usuario disponible"});
+          }
+        }
+      });
     }
   });
   
