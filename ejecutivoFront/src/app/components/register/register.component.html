@@ -1,0 +1,57 @@
+<h1 class="pb-2 mt-4 mb-2 border-bottom">Registro</h1>
+
+
+<form [formGroup] = "form" (submit)="onRegisterSubmit()">
+  <div class="form-group">
+    <label for="username">Nombre de usuario: </label>
+    <div [ngClass]="{'has-error':(form.controls.username.errors && form.controls.username.dirty), 'has-success': !form.controls.username.errors}">
+      <input type="text" name="username" class="form-control" placeholder="Usuario" formControlName="username"/>
+      <ul class="form-text text-muted">
+          <li *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">Este campo es obligatorio</li>
+          <li *ngIf="(form.controls.username.errors?.minlength || form.controls.username.errors?.maxlength) && form.controls.username.dirty">Mínimo 3, máximo 15 caracteres</li>
+          <li *ngIf="form.controls.username.errors?.validateUsername && form.controls.username.dirty">El nombre de usuario no debe tener ningún caracter especial</li>
+
+        </ul>
+    </div>
+  </div>
+  <div class="form-group">
+      <label for="email">Email: </label>
+      <div [ngClass]="{'has-error':(form.controls.email.errors && form.controls.email.dirty), 'has-success': !form.controls.email.errors}">
+        <input type="text" name="email" class="form-control" placeholder="Email" formControlName="email"/> 
+        <ul class="form-text text-muted">
+          <li *ngIf="form.controls.email.errors?.required && form.controls.email.dirty">Este campo es obligatorio</li>
+          <li *ngIf="(form.controls.email.errors?.minlength || form.controls.email.errors?.maxlength) && form.controls.email.dirty">Mínimo 5, máximo 30 caracteres</li>
+          <li *ngIf="form.controls.email.errors?.validateEmail && form.controls.email.dirty">El formato debe ser de un email válido</li>
+        </ul>
+      </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Contraseña: </label>
+        <div [ngClass]="{'has-error':(form.controls.password.errors && form.controls.password.dirty), 'has-success': !form.controls.password.errors}">
+          <input type="password" name="password" class="form-control" placeholder="Contraseña" formControlName="password"/>
+          <ul class="form-text text-muted">
+              <li *ngIf="form.controls.password.errors?.required && form.controls.password.dirty">Este campo es obligatorio</li>
+              <li *ngIf="form.controls.password.errors?.minlength || form.controls.password.errors?.maxlength">Mínimo 8, máximo 35 caracteres</li>
+              <li *ngIf="form.controls.password.errors?.validatePassword && form.controls.password.dirty">El password debe tener por lo menos 8 caracteres y no más de 35</li>
+            </ul>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="confirmpassword">Repite contraseña: </label>
+        <div [ngClass]="{'has-error':(form.controls.confirmPassword.errors && form.controls.confirmPassword.dirty) || (form.errors?.matchingPasswords && form.controls.confirmPassword.dirty), 'has-success': !form.controls.confirmPassword.errors && !form.errors?.matchingPasswords}">
+          <input type="password" name="confirmpassword" class="form-control" placeholder="Repite contraseña" formControlName="confirmPassword"/>
+          <ul class="form-text text-muted">
+              <li *ngIf="form.controls.confirmPassword.errors?.required && form.controls.confirmPassword.dirty">Este campo es obligatorio</li>
+              <li *ngIf="form.errors?.matchingPasswords && form.controls.confirmPassword.dirty">El password no coincide</li>
+            </ul>
+        </div>
+      </div>
+      
+      <input [disabled]="!form.valid" type="submit" class="btn btn-primary" value="Registrar">
+
+</form>
+
+
+<!-- <p>Username: {{form.controls.username.value}}</p>
+<p>Email: {{form.controls.email.value}}</p>
+<p>Password: {{form.controls.password.value}}</p> -->
