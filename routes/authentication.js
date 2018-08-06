@@ -1,4 +1,6 @@
 const User = require('../models/user')
+const jwt = require('jsonwebtoken')
+const config = require('../config/database')
 
 module.exports = (router) => {
   
@@ -86,6 +88,36 @@ module.exports = (router) => {
           }
         }
       });
+    }
+  });
+
+
+  //____________________________________
+  router.post('/login', (req, res) => {
+    if (!req.body.email) {
+      res.json({ success: false, message: 'No se ha introducido correo electrónico.' }); 
+    } else {
+      if (!req.body.password) {
+        res.json({ success: false, message: 'No se ha proporcionado contraseña.' }); 
+      } else {
+        User.findOne({ email: req.body.email}, (err, user) => {  
+          if (err) {
+            res.json({ success: false, message: err }); 
+          } else {
+            if (!user) {
+              res.json({ success: false, message: 'No se encuentra el registro  del usuario.' }); 
+            } else {
+              const validPassword = user.comparePassword(req.body.password); 
+              if (!validPassword) {
+                res.json({ success: false, message: 'El password no coincide.' }); 
+              } else {
+                const token = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '2h' }); 
+                res.json({ success: true, message: 'Inicio de sesión correcto', token: token, user: { email: user.email } }); //jsonwebtoken método para mantener la sesión iniciada
+              }
+            }
+          }
+        });
+      }
     }
   });
   

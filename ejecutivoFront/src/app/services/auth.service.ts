@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions} from '@angular/http';
-import { Observable, Subject } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+// import { Observable, Subject } from 'rxjs';
+// import { map, take } from 'rxjs/operators';
 // import 'rxjs/Rx';
-// import { map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+
 
 
 
@@ -14,11 +15,16 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
 
   domain = "http://localhost:8080"
+  authToken;
+  user;
+  options;
 
   constructor(
     private http: Http
   ) { }
 
+
+  //REGISTER
   registerUser(user) {
     return this.http.post(this.domain + '/authentication/register', user).pipe(map(res => res.json()));
   }
@@ -29,6 +35,19 @@ export class AuthService {
 
   checkEmail(email) {
     return this.http.get(this.domain + '/authentication/checkEmail/'+ email).pipe(map(res => res.json()));
+  }
+  
+
+  //LOGIN
+  login(user) {
+    return this.http.post(this.domain + '/authentication/login/', user).pipe(map(res => res.json()));
+  }
+  
+  storeUserData(token, user) {
+    localStorage.setItem('token', token); 
+    localStorage.setItem('user', JSON.stringify(user)); 
+    this.authToken = token; 
+    this.user = user;
   }
 
 }
