@@ -19,12 +19,12 @@
     <div >
     <ul class="nav navbar-nav">
       
-      <li  style="text-decoration: none; display: inline-block"><a routerLink= "/register">Registro</a></li>
-      <li style="text-decoration: none; display: inline-block"><a routerLink="/login">Iniciar sesión</a></li>
-      <li   style="text-decoration: none; display: inline-block"><a routerLink="/profile">Mi perfil</a></li>
-      <li style="text-decoration: none; display: inline-block"><a href="#" (click) = "onLogoutClick()">Cerrar sesión</a></li>
-      <!-- <li routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><a class="py-2 d-none d-md-inline-block" routerLink="/dashboard">Todos los programas</a></li> -->
-      <li  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/dashboard">Todos los programas</a></li>
+      <li  *ngIf="!authService.loggedIn()" style="text-decoration: none; display: inline-block"><a routerLink= "/register">Registro</a></li>
+      <li  *ngIf="!authService.loggedIn()" style="text-decoration: none; display: inline-block"><a routerLink="/login">Iniciar sesión</a></li>
+      <li *ngIf="!authService.loggedIn()"  style="text-decoration: none; display: inline-block"><a routerLink="/profile">Mi perfil</a></li>
+      <li *ngIf="!authService.loggedIn()"style="text-decoration: none; display: inline-block"><a href="#" (click) = "onLogoutClick()">Cerrar sesión</a></li>
+      <li routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><a class="py-2 d-none d-md-inline-block" routerLink="/dashboard">Todos los programas</a></li>
+      <!-- <li  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/dashboard">Todos los programas</a></li> -->
 
     </ul>
   </div>

@@ -13,9 +13,19 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 
+import { JwtModule } from '@auth0/angular-jwt';
+import { HttpClientModule } from '@angular/common/http';
 
+import { AuthGuard } from './guards/auth.guard';
+// import { NotAuthGuard } from './guards/notAuth.guard';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
+
+  
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -31,11 +41,22 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
     AppRoutingModule,
     ReactiveFormsModule,
     FlashMessagesModule.forRoot(),
-    
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:8080', 'localhost:4200'],
+        blacklistedRoutes: []
+      }
+    })
+  
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard, ], //NotAuthGuard
   bootstrap: [AppComponent]
+
+  
 })
+
 
 
 export class AppModule { }

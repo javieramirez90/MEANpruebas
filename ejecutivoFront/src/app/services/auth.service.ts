@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions} from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 // import { Observable, Subject } from 'rxjs';
 // import { map, take } from 'rxjs/operators';
 // import 'rxjs/Rx';
@@ -14,24 +15,17 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 
-
-
 export class AuthService {
 
-jwtHelper = new JwtHelperService;
-  
   domain = "http://localhost:8080"
   authToken;
   user;
   options;
-  // helper = new JwtHelperService();
-
+  
 
   constructor(
     private http: Http,
-    // public jwtHelper: JwtHelperService
-    // public jwtHelper: JwtHelperService
-    
+    public jwtHelper: JwtHelperService
   ) { }
 
   createAuthenticationHeaders() {
@@ -87,12 +81,15 @@ jwtHelper = new JwtHelperService;
     return this.http.get(this.domain + '/authentication/profile', this.options).pipe(map(res => res.json()));
   }
 
-
+  ngOnInit() {
+    console.log(this.jwtHelper.isTokenExpired()); // true or false
+    }
 
   // Function to check if user is logged in
   loggedIn() {
-    return this.jwtHelper.isTokenExpired()
+    this.jwtHelper.isTokenExpired(this.authToken);
   }
+  
 
   //   const helper = new JwtHelperService();
   //   const isExpired = helper.isTokenExpired(localStorage.getItem('token'));
