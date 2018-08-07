@@ -120,8 +120,41 @@ module.exports = (router) => {
       }
     }
   });
-     
 
+//Middleware
+
+router.use((req, res, next) => {
+  const token = req.headers['authorization'];
+  if (!token) {
+    res.json({ success: false, message: 'No se ha recibido token' }); 
+  } else {
+    jwt.verify(token, config.secret, (err, decoded) => {
+      if (err) {
+        res.json({ success: false, message: 'Token inválido: ' + err }); 
+      } else {
+        req.decoded = decoded; 
+        next();
+      }
+    });
+  }
+});
+
+
+  //PROFILE
+  router.get('/profile', (req, res) => {
+    User.findOne({ _id: req.decoded.userId }).select('username email').exec((err, user) => {
+      if (err) {
+        res.json({ success: false, message: err }); 
+      } else {
+        if (!user) {
+          res.json({ success: false, message: 'No se ha encontrado al usuario' }); 
+        } else {
+          res.json({ success: true, user: user }); 
+        }
+      }
+    });
+  });
+  
 
   return router;
 }
