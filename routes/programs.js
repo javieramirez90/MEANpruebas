@@ -21,6 +21,30 @@ module.exports = (router) => {
     }).sort({ '_id': -1 }); 
   });
 
+  // router.get('dasboard/allPrograms', (req, res) => { 
+  //   Program.find({}, (err, programs) => { 
+  //     if (err) {
+  //       res.json({ success: false, message: err }); 
+  //     } else {
+  //       if (!programs) {
+  //         res.json({ success: false, message: 'No se han encontrado programas' }); 
+  //       } else {
+  //         res.json({ success: true, programs: programs })
+  //         console.log(res.json,"esto es lo que regresa el server"); 
+  //       }
+  //     }
+  //   }).sort({ '_id': -1 }); 
+  // });
+
+  router.get('dasboard/allPrograms', (req,res)=>{
+Programs.find()
+.then(programas=>{
+  return res.status(202).json(programs)
+})
+.catch(e=>{
+  return res.status(404).json(err)
+})
+  })
 
   //consulta por programa
 

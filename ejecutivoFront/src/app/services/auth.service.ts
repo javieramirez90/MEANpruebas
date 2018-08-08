@@ -19,8 +19,9 @@ import { map } from 'rxjs/operators';
 
 export class AuthService {
 
-  domain = "http://localhost:8080";
-  // domain = environment.domain
+  // domain = "http://localhost:8080"
+  
+  domain = "/"
   authToken;
   user;
   options;
@@ -76,7 +77,7 @@ export class AuthService {
     localStorage.setItem('token', token); 
     localStorage.setItem('user', JSON.stringify(user)); 
     this.authToken = token; 
-    this.user = user;
+    user = user;
   }
 
   getProfile() {

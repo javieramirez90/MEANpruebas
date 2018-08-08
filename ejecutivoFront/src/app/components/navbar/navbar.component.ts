@@ -9,13 +9,16 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 
 
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+  user:any=localStorage.getItem("user")
+
+
 
   constructor( 
     public authService: AuthService,
@@ -32,6 +35,7 @@ export class NavbarComponent implements OnInit {
     
   }
   
+
 
 
   ngOnInit() {

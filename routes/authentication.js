@@ -3,6 +3,12 @@ const jwt = require('jsonwebtoken')
 const config = require('../config/database')
 
 module.exports = (router) => {
+
+  router.get('/*', (req, res, next) => {
+
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+    
+    });
   
   
   router.post('/register', (req, res) => {

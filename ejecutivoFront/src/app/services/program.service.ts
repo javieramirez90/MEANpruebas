@@ -9,7 +9,7 @@ export class ProgramService {
   
   options;
   domain = this.authService.domain;
-
+  url="localhost:8080/"
   constructor(
     private authService: AuthService,
     private http: Http
@@ -29,6 +29,12 @@ createAuthenticationHeaders() {
 getAllPrograms() {
   this.createAuthenticationHeaders(); 
   return this.http.get(this.domain + 'programs/allPrograms', this.options).pipe(map(res => res.json()));
+}
+
+AllProg(){
+  console.log(this.url + 'dasboard/allPrograms')
+
+  return this.http.get(this.url + 'dasboard/allPrograms').pipe(map(res => res.json()));
 }
 
 getSingleProgram(id) {
