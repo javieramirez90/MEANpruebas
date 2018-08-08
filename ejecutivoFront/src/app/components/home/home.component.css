@@ -7,3 +7,14 @@
   width: 140px;
   height: auto;
 }
+
+.marg {
+ margin: 100px 0;
+}
+
+.leady {
+  margin-bottom: 60px;
+}
+.bot {
+  align-self: baseline;
+}

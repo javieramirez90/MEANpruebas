@@ -19,37 +19,37 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
-    this.createForm(); // Create Login Form when component is constructed
+    this.createForm(); // 
   }
 
-  // Function to create login form
+  
   createForm() {
     this.form = this.formBuilder.group({
-      email: ['', Validators.required], // email field
-      password: ['', Validators.required] // Password field
+      email: ['', Validators.required], 
+      password: ['', Validators.required]
     });
   }
 
-  // Function to disable form
+  
   disableForm() {
-    this.form.controls['email'].disable(); // Disable email field
-    this.form.controls['password'].disable(); // Disable password field
+    this.form.controls['email'].disable(); 
+    this.form.controls['password'].disable();
   }
 
-  // Function to enable form
+
   enableForm() {
-    this.form.controls['email'].enable(); // Enable email field
-    this.form.controls['password'].enable(); // Enable password field
+    this.form.controls['email'].enable();
+    this.form.controls['password'].enable(); 
   }
 
-  // Functiont to submit form and login user
+  
   onLoginSubmit() {
-    this.processing = true; // Used to submit button while is being processed
-    this.disableForm(); // Disable form while being process
-    // Create user object from user's input
+    this.processing = true; 
+    this.disableForm(); 
+    
     const user = {
-      email: this.form.get('email').value, // email input fieldx
-      password: this.form.get('password').value // Password input field
+      email: this.form.get('email').value,
+      password: this.form.get('password').value 
     }
 
     
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
         this.message = data.message;
         this.authService.storeUserData(data.token, data.user);
         setTimeout(() => {
-          this.router.navigate(['/dashboard']); 
+          this.router.navigate(['/profile']); 
         }, 1000);
       }
     });

@@ -12,12 +12,15 @@ import { AuthService } from './services/auth.service';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FlashMessagesModule } from 'angular2-flash-messages';
-
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AuthGuard } from './guards/auth.guard';
+import { ProgramsComponent } from './components/programs/programs.component';
 
+import { AuthGuard } from './guards/auth.guard';
+import { ITAMComponent } from './components/itam/itam.component';
+import { IBEROComponent } from './components/ibero/ibero.component';
+import { FooterComponent } from './components/footer/footer.component';
 // import { NotAuthGuard } from './guards/notAuth.guard';
 
 export function tokenGetter() {
@@ -35,6 +38,10 @@ export function tokenGetter() {
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
+    ProgramsComponent,
+    ITAMComponent,
+    IBEROComponent,
+    FooterComponent,
   
   ],
   imports: [

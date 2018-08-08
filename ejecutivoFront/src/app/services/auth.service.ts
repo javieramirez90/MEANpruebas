@@ -5,9 +5,11 @@ import { HttpClient } from '@angular/common/http';
 // import { map, take } from 'rxjs/operators';
 // import 'rxjs/Rx';
 import { map } from 'rxjs/operators';
+// import { environment } from '../../environments/environment';
 
 
-import { JwtHelperService } from '@auth0/angular-jwt';
+
+// import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 
@@ -17,7 +19,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 
 export class AuthService {
 
-  domain = "http://localhost:8080"
+  domain = "http://localhost:8080";
+  // domain = environment.domain
   authToken;
   user;
   options;
@@ -25,7 +28,7 @@ export class AuthService {
 
   constructor(
     private http: Http,
-    public jwtHelper: JwtHelperService
+    // public jwtHelper: JwtHelperService
   ) { }
 
   createAuthenticationHeaders() {
@@ -82,12 +85,19 @@ export class AuthService {
   }
 
   ngOnInit() {
-    console.log(this.jwtHelper.isTokenExpired()); // true or false
+    // console.log(this.jwtHelper.isTokenExpired()); // true or false
     }
 
   // Function to check if user is logged in
   loggedIn() {
-    this.jwtHelper.isTokenExpired(this.authToken);
+    if(this.authToken === null){
+      return false;
+    } else {
+      return true;
+    }
+
+
+    // this.jwtHelper.isTokenExpired(this.authToken);
   }
   
 
