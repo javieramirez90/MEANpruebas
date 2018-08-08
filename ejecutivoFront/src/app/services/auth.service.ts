@@ -19,9 +19,9 @@ import { map } from 'rxjs/operators';
 
 export class AuthService {
 
-  // domain = "http://localhost:8080"
+  domain = "http://localhost:8080"
   
-  domain = "/"
+  // domain = "/"
   authToken;
   user;
   options;
