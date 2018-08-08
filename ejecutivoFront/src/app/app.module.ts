@@ -17,6 +17,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AuthGuard } from './guards/auth.guard';
+import { ProgramsComponent } from './src/app/components/programs/programs.component';
 // import { NotAuthGuard } from './guards/notAuth.guard';
 
 export function tokenGetter() {
@@ -33,7 +34,8 @@ export function tokenGetter() {
     DashboardComponent,
     RegisterComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProgramsComponent
   ],
   imports: [
     BrowserModule,
